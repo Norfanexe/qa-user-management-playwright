@@ -1,8 +1,23 @@
-// Estrutura principal responsável por armazenar os usuários cadastrados.
 let usuarios = carregarUsuarios();
+let usuarioEmEdicao = null;
 
-// Captura o botão de cadastro na interface.
-const botaoCadastrar = document.getElementById("btnCadastrar");
+const botaoCadastrar =
+    document.getElementById("btnCadastrar");
+
+const limparFormulario = () => {
+
+    document.getElementById("nome").value = "";
+    document.getElementById("idade").value = "";
+    document.getElementById("cargo").value = "";
+    document.getElementById("ativo").value = "true";
+
+};
+
+const campoPesquisa = document.getElementById("pesquisaUsuario");
+
+campoPesquisa.addEventListener("input", () => {
+    atualizarLista();
+});
 
 // Evento disparado ao clicar em "Cadastrar".
 botaoCadastrar.addEventListener("click", () => {
@@ -53,25 +68,100 @@ botaoCadastrar.addEventListener("click", () => {
     // Conceito aplicado:
     // - Arrays
     // - Método push()
+if (usuarioEmEdicao) {
+
+    const indice = usuarios.findIndex(
+        usuario => usuario.id === usuarioEmEdicao
+    );
+
+    usuarios[indice] = {
+        id: usuarioEmEdicao,
+        nome,
+        idade: Number(idade),
+        cargo,
+        ativo: ativo === "true"
+    };
+
+    usuarioEmEdicao = null;
+
+    botaoCadastrar.textContent =
+        "Cadastrar";
+
+    document.getElementById("mensagem").textContent =
+        "Usuário atualizado com sucesso.";
+
+    limparFormulario();
+
+} else {
+
     usuarios.push(usuario);
 
-    salvarUsuarios(usuarios);
-    atualizarLista();
-
-    // Feedback visual para o usuário.
     document.getElementById("mensagem").textContent =
         "Usuário cadastrado com sucesso.";
 
+    limparFormulario();
+
+}
+
+salvarUsuarios(usuarios);
+atualizarLista();
+
+
 });
+
+const editarUsuario = (id) => {
+
+    const usuario = usuarios.find(
+        usuario => usuario.id === id
+    );
+
+    if (!usuario) {
+        return;
+    }
+
+    document.getElementById("nome").value =
+        usuario.nome;
+
+    document.getElementById("idade").value =
+        usuario.idade;
+
+    document.getElementById("cargo").value =
+        usuario.cargo;
+
+    document.getElementById("ativo").value =
+        usuario.ativo.toString();
+
+    usuarioEmEdicao = id;
+
+    botaoCadastrar.textContent =
+        "Salvar Alterações";
+
+};
 
 // Responsável por reconstruir a lista de usuários exibida na tela.
 const atualizarLista = () => {
 
     const lista = document.getElementById("listaUsuarios");
 
+    const termoPesquisa =
+    campoPesquisa.value.toLowerCase();
+
     lista.innerHTML = "";
 
-    for (const usuario of usuarios) {
+    const usuariosFiltrados = usuarios.filter(usuario =>
+    usuario.nome.toLowerCase().includes(termoPesquisa) ||
+    usuario.cargo.toLowerCase().includes(termoPesquisa)
+);
+
+if (usuariosFiltrados.length === 0) {
+
+    lista.innerHTML =
+        "<li>Nenhum usuário encontrado.</li>";
+
+    return;
+}
+
+    for (const usuario of usuariosFiltrados)  {
 
         const item = document.createElement("li");
 
@@ -79,6 +169,13 @@ const atualizarLista = () => {
 
         textoUsuario.textContent =
             `${usuario.nome} - ${usuario.idade} anos - ${usuario.cargo} - ${usuario.ativo ? "Ativo" : "Inativo"} `;
+
+        const botaoEditar = document.createElement("button");
+        botaoEditar.textContent = "Editar";
+
+        botaoEditar.addEventListener("click", () => {
+            editarUsuario(usuario.id);
+        });
 
         const botaoExcluir = document.createElement("button");
         botaoExcluir.textContent = "Excluir";
@@ -88,6 +185,7 @@ const atualizarLista = () => {
         });
 
         item.appendChild(textoUsuario);
+        item.appendChild(botaoEditar);
         item.appendChild(botaoExcluir);
 
         lista.appendChild(item);
