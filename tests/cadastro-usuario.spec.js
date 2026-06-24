@@ -28,7 +28,7 @@ test.describe('Cadastro de Usuários', () => {
         await page.click('#btnCadastrar');
 
         await expect(page.locator('#mensagem')).toHaveText('Erro: preencha todos os campos.');
-        await expect(page.locator('#listaUsuarios')).toBeEmpty();
+        await expect(page.locator('#listaUsuarios')).toContainText('Nenhum usuário encontrado.');
     });
 
     test('Não deve cadastrar menor de idade como ativo', async ({ page }) => {
