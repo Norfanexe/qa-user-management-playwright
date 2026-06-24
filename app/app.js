@@ -69,26 +69,39 @@ const atualizarLista = () => {
 
     const lista = document.getElementById("listaUsuarios");
 
-    // Limpa a lista antes de renderizar novamente.
-    // Evita duplicação visual dos registros.
     lista.innerHTML = "";
 
-    // Percorre todos os usuários cadastrados.
-    // Conceitos aplicados:
-    // - for...of
-    // - Arrays de Objetos
     for (const usuario of usuarios) {
 
         const item = document.createElement("li");
 
-        // Operador ternário utilizado para exibição amigável do status.
-        item.textContent =
-            `${usuario.nome} - ${usuario.idade} anos - ${usuario.cargo} - ${usuario.ativo ? "Ativo" : "Inativo"}`;
+        const textoUsuario = document.createElement("span");
+
+        textoUsuario.textContent =
+            `${usuario.nome} - ${usuario.idade} anos - ${usuario.cargo} - ${usuario.ativo ? "Ativo" : "Inativo"} `;
+
+        const botaoExcluir = document.createElement("button");
+        botaoExcluir.textContent = "Excluir";
+
+        botaoExcluir.addEventListener("click", () => {
+            excluirUsuario(usuario.id);
+        });
+
+        item.appendChild(textoUsuario);
+        item.appendChild(botaoExcluir);
 
         lista.appendChild(item);
-
     }
+};
 
+const excluirUsuario = (id) => {
+    usuarios = usuarios.filter(usuario => usuario.id !== id);
+
+    salvarUsuarios(usuarios);
+    atualizarLista();
+
+    document.getElementById("mensagem").textContent =
+        "Usuário excluído com sucesso.";
 };
 
 atualizarLista();
