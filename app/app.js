@@ -1,5 +1,5 @@
 // Estrutura principal responsável por armazenar os usuários cadastrados.
-let usuarios = [];
+let usuarios = carregarUsuarios();
 
 // Captura o botão de cadastro na interface.
 const botaoCadastrar = document.getElementById("btnCadastrar");
@@ -19,6 +19,7 @@ botaoCadastrar.addEventListener("click", () => {
     // - Conversão de tipos (String -> Number)
     // - Booleanos
     const usuario = {
+        id: Date.now(),
         nome: nome,
         idade: Number(idade),
         cargo: cargo,
@@ -54,7 +55,7 @@ botaoCadastrar.addEventListener("click", () => {
     // - Método push()
     usuarios.push(usuario);
 
-    // Atualiza a interface após novo cadastro.
+    salvarUsuarios(usuarios);
     atualizarLista();
 
     // Feedback visual para o usuário.
@@ -90,3 +91,4 @@ const atualizarLista = () => {
 
 };
 
+atualizarLista();
