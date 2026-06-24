@@ -1,5 +1,9 @@
 # QA User Management Playwright
 
+![Playwright](https://img.shields.io/badge/Playwright-E2E-green)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
+![Status](https://img.shields.io/badge/Tests-24%20Passed-success)
+
 ## 📋 Objetivo
 
 Projeto desenvolvido para demonstrar conhecimentos em Qualidade de Software (QA), Automação de Testes E2E com Playwright e desenvolvimento de regras de negócio utilizando JavaScript.
