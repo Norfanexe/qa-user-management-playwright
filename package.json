@@ -1,0 +1,30 @@
+{
+  "name": "qa-user-management-playwright",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "report": "playwright show-report",
+    "ui": "playwright test --ui",
+    "debug": "playwright test --debug"
+  },
+  "keywords": [
+    "qa",
+    "playwright",
+    "automation",
+    "javascript",
+    "e2e",
+    "testing",
+    "quality-assurance"
+  ],
+  "author": "Rodrigo Pereira Costa",
+  "license": "ISC",
+  "description": "Projeto de cadastro de usuários com automação E2E utilizando Playwright.",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.0.0"
+  }
+}

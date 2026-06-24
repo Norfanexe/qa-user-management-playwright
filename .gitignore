@@ -1,0 +1,11 @@
+# Dependências
+node_modules/
+
+# Relatórios e resultados Playwright
+playwright-report/
+test-results/
+blob-report/
+
+# Cache e autenticação
+playwright/.cache/
+playwright/.auth/
