@@ -10,8 +10,6 @@ Projeto de automação End-to-End desenvolvido com Playwright para validar uma a
 
 ## 📑 Sumário
 
-## 📑 Sumário
-
 - [📋 Objetivo](#-objetivo)
 - [⭐ Destaques do Projeto](#-destaques-do-projeto)
 - [📁 Estrutura do Projeto](#-estrutura-do-projeto)
@@ -198,7 +196,6 @@ npx playwright test --project=chromium
 ```bash
 npx playwright show-report
 ```
-
 ---
 ## 📖 Regras de Negócio
 
