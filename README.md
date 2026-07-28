@@ -476,13 +476,17 @@ evidencias/
 
 O projeto possui pipeline automatizada através do GitHub Actions.
 
-A cada push realizado na branch principal, o workflow executa automaticamente:
+A cada push realizado na branch principal, o workflow executa automaticamente, conforme exemplo abaixo:
 
 - Instalação das dependências
 - Instalação dos navegadores Playwright
 - Execução da suíte automatizada
 - Geração de artefatos
 - Publicação dos resultados da execução
+
+<p align="center">
+  <img src="./evidencias/git-actions.gif" width="100%" alt="Relatório Git Actions">
+</p>
 
 ---
 ### Status Atual
